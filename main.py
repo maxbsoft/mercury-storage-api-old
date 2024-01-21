@@ -26,7 +26,7 @@ def upload_csv():
         # Импорт в ScyllaDB
         try:
             subprocess.run([
-                'cqlsh', '-e', 
+                'cqlsh', '23.134.94.82', '-e',
                 f"COPY {keyspace}.{table} FROM '{filepath}' WITH HEADER=TRUE", 
             ], check=True)
             return jsonify({"success": "File uploaded and imported to ScyllaDB"}), 200
