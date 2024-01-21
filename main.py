@@ -37,5 +37,9 @@ def upload_csv():
 
     return jsonify({"error": "Missing data"}), 400
 
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({"success": "Version: 1.0"}), 200
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001, debug=False, threaded=True)
