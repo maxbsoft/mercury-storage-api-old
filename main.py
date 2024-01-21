@@ -26,11 +26,13 @@ def upload_csv():
         # Импорт в ScyllaDB
         try:
             subprocess.run([
-                'cqlsh', '23.134.94.82', '-e',
+                'cqlsh', '-e',
                 f"COPY {keyspace}.{table} FROM '{filepath}' WITH HEADER=TRUE", 
             ], check=True)
+            os.remove(filepath)
             return jsonify({"success": "File uploaded and imported to ScyllaDB"}), 200
         except subprocess.CalledProcessError as e:
+            os.remove(filepath)
             return jsonify({"error": str(e)}), 500
 
     return jsonify({"error": "Missing data"}), 400
