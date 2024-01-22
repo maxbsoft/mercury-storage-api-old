@@ -29,7 +29,7 @@ def upload_csv():
                 'cqlsh', '-e',
                 f"COPY {keyspace}.{table} FROM '{filepath}' WITH HEADER=FALSE", 
             ], check=True)
-            # os.remove(filepath)
+            os.remove(filepath)
             return jsonify({"success": "File uploaded and imported to ScyllaDB"}), 200
         except subprocess.CalledProcessError as e:
             # os.remove(filepath)
